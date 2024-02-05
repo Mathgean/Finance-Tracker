@@ -1,0 +1,14 @@
+{% extends "users/base.html" %}
+{% block content %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}<!-- csrf token used for protection of forms from attack. Hence, django requires this. -->
+            <fieldset>
+                <legend>Join Today</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <button type="submit">Sign up</button>
+        </form>
+        <small>Already Have An Account? <a href="{% url 'login' %}">Log in</a></small>
+    </div>
+{% endblock %}

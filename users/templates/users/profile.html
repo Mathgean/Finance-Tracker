@@ -1,0 +1,15 @@
+{% extends "finance/base.html" %}
+{% block content %}
+    <img src="{{ user.profile.image.url }}">
+    <h2> {{ user.username }}</h2>
+    <p>{{ user.email }}</p>
+    <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}<!-- csrf token used for protection of forms from attack. Hence, django requires this. -->
+            <fieldset>
+                <legend>Profile Info</legend>
+                {{ u_form.as_p }}
+                {{ p_form.as_p }}
+            </fieldset>
+            <button type="submit">Update</button>
+        </form>
+{% endblock %}
