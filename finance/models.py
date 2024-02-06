@@ -31,21 +31,3 @@ class Expense(models.Model):
 
     def get_absolute_url(self):
         return reverse('finance-home')
-
-
-class Income(models.Model):
-    CATEGORY_CHOICES = [
-        ('Salary', 'Salary'),
-        ('Sales', 'Sales'),
-        ('Dividends', 'Dividends'),
-        ('Rental', 'Rental'),
-        ('Grands', 'Grands '),
-        ('Refunds', 'Refunds'),
-        ('Awards', 'Awards'),
-        ('Others', 'Others'),
-    ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    income_type = models.CharField(max_length=25, choices=CATEGORY_CHOICES)
-    date = models.DateTimeField(default=timezone.now)
-    amount = models.IntegerField()
-    description = models.TextField(blank=True)
