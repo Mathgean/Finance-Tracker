@@ -1,17 +1,17 @@
 {% extends "finance/base.html" %}
 {% block content %}
-    <table id="k">
-        <tr id="l">
+    <table class="b">
+        <tr class="c">
             <th>Date</th>
-            <th>ExpenseType</th>
+            <th>IncomeType</th>
             <th>Amount</th>
             <th>Category</th>
             <th>Description</th>
         </tr>
 
-        <tr id="m">
+        <tr class="d">
             <td>{{ object.date|date:"M d, y" }}</td>
-            <td>{{ object.expense_type }}</td>
+            <td>{{ object.income_type }}</td>
             <td>{{ object.amount }}</td>
             <td>{{ object.category }}</td>
             {% if object.description %}
@@ -19,6 +19,6 @@
             {% endif %}
         </tr>
     </table>
-    <a href="{% url 'expense-update' object.id %}" class="a">Update</a>
-    <a href="{% url 'expense-delete' object.id %}" class="a">Delete</a>
+    <a href="{% url 'income-update' object.id %}" class="f">Update</a>
+    <a href="{% url 'income-delete' object.id %}" class="f">Delete</a>
 {% endblock %}

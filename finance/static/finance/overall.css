@@ -1,0 +1,110 @@
+/* field.css */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+nav a:hover {
+    color: #fff;
+    background-color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+.expense-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.d:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.e {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.e:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 5px 0;
+    }
+
+    nav a {
+        padding: 5px;
+        margin: 0 3px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .expense-card {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        margin-bottom: 10px;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    .e {
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+}

@@ -1,8 +1,9 @@
 {% extends "finance/base.html" %}
 {% block content %}
     <img src="{{ user.profile.image.url }}">
-    <h2> {{ user.username }}</h2>
-    <p>{{ user.email }}</p>
+    <h2> User Name: {{ user.username }}</h2>
+    <h2> Email: {{ user.email }}</h2>
+    <h2> Budget Limit: {{ user.profile.budget_limit }}</h2>
     <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}<!-- csrf token used for protection of forms from attack. Hence, django requires this. -->
             <fieldset>
