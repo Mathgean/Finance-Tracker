@@ -3,25 +3,41 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import DetailView, DeleteView, UpdateView, CreateView
 
-from .forms import ExpenseForm, IncomeForm
+from .forms import ExpenseForm, IncomeForm, MonthYearForm
 from .models import Expense, Income
 
 
 @login_required
 def home(request):
+
+
+    expense_set = request.user.expense_set.filter(date__month=timezone.now().month, date__year=timezone.now().year)
+    income_set = request.user.income_set.filter(date__month=timezone.now().month, date__year=timezone.now().year)
+    if request.method == 'POST':
+        form = MonthYearForm(request.POST)
+        if form.is_valid():
+            # Process the data in form.cleaned_data
+            month = int(form.cleaned_data['month'])
+            year = int(form.cleaned_data['year'])
+            expense_set = request.user.expense_set.filter(date__month=month, date__year=year)
+            income_set = request.user.income_set.filter(date__month=month, date__year=year)
+            # Only to Show in Home page
+    else:
+        form = MonthYearForm()
+
     amount_spend = 0
-    budget_exceeded = 0
-    for i in request.user.expense_set.all():
+    for i in expense_set:
         amount_spend += i.amount
-    amount_spend = request.user.profile.budget_limit - amount_spend
-    if amount_spend < 0:
-        budget_exceeded = amount_spend * -1
-        amount_spend = 0
-    context = {"title": "Home page", 'expenses': request.user.expense_set.all(),
-               "incomes": request.user.income_set.all(), 'paginate_by': 5, 'remaining_budget': amount_spend,
-               'budget_exceeded': budget_exceeded}
+    amount_earned = 0
+    for i in income_set:
+        amount_earned += i.amount
+    remaining_budget = request.user.profile.budget_limit - amount_spend
+
+    context = {"title": "Home", 'expenses': expense_set, "incomes": income_set, 'remaining_budget': remaining_budget,
+               'expense_amount': amount_spend, 'income_amount': amount_earned, 'form': form}  # 'paginate_by': 5,
     return render(request, 'finance/home.html', context)
 
 
@@ -51,7 +67,7 @@ class ExpenseCreateView(LoginRequiredMixin, CreateView):
 
 class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
     model = Expense
-    fields = ['expense_type', 'amount', 'category', 'description']
+    fields = ['date', 'expense_type', 'amount', 'category', 'description']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -78,7 +94,7 @@ class IncomeCreateView(LoginRequiredMixin, CreateView):
 
 class IncomeUpdateView(LoginRequiredMixin, UpdateView):
     model = Income
-    fields = ['income_type', 'amount', 'category', 'description']
+    fields = ['date','income_type', 'amount', 'category', 'description']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
