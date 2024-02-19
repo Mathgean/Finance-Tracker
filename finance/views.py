@@ -5,14 +5,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic import DetailView, DeleteView, UpdateView, CreateView
-
 from .forms import ExpenseForm, IncomeForm, MonthYearForm
 from .models import Expense, Income
 
 
 @login_required
 def home(request):
-
 
     expense_set = request.user.expense_set.filter(date__month=timezone.now().month, date__year=timezone.now().year)
     income_set = request.user.income_set.filter(date__month=timezone.now().month, date__year=timezone.now().year)
@@ -94,7 +92,7 @@ class IncomeCreateView(LoginRequiredMixin, CreateView):
 
 class IncomeUpdateView(LoginRequiredMixin, UpdateView):
     model = Income
-    fields = ['date','income_type', 'amount', 'category', 'description']
+    fields = ['date', 'income_type', 'amount', 'category', 'description']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
