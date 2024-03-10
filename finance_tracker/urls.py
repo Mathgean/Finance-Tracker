@@ -41,7 +41,7 @@ urlpatterns = [
     path('about/', finance_views.about, name='finance-about'),
     path('', include('finance.urls')),
     path('profile/', users_views.profile, name='profile'),
-
+    path('profile_edit/', users_views.profile_edit, name='profile-edit'),
 ]
 
 if settings.DEBUG:

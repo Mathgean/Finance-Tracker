@@ -1,133 +1,159 @@
 {% extends "finance/base.html" %}
 {% block content %}
-<div id="yy">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.month.label_tag }}
-        {{ form.month }}
-        {{ form.year.label_tag }}
-        {{ form.year }}
-        <button type="submit">Submit</button>
-    </form>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.month.label_tag }}
+                        {{ form.month }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.year.label_tag }}
+                        {{ form.year }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-primary">Budget Limit: {{ user.profile.budget_limit }}</h2>
+                <h2 class="text-success">Remaining Budget: {{ remaining_budget }}</h2>
+                <h2 class="text-danger">Total Expense : {{ expense_amount }}</h2>
+                <h2 class="text-info">Total Income : {{ income_amount }}</h2>
+            </div>
+        </div>
+    </div>
 </div>
-<div id="zz">
-    <h2>Budget Limit: {{ user.profile.budget_limit }}</h2>
-    <h2>Remaining Budget: {{ remaining_budget }}</h2>
-    <h2>Total Expense : {{ expense_amount }}</h2>
-    <h2>Total Income : {{ income_amount }}</h2>
-</div>
-<div id="q">
-    {% if expenses and incomes %}
-        <h2 align="center" id="p">Hey {{ user }}, your expenses and incomes are listed below </h2>
-        <table class="b">
-            <tr class="c">
-                <th>Date</th>
-                <th>ExpenseType</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Description</th>
-            </tr>
-        {% for con in expenses %}
-            <tr class="d">
-                <td>{{ con.date|date:"M d, y" }}</td>
-                <td><a href="{% url 'expense-detail' con.id %}">{{ con.expense_type }}</a></td>
-                <td>{{ con.amount }}</td>
-                <td>{{ con.category }}</td>
-                {% if con.description %}
-                    <td>{{ con.description }}</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-        </table>
-        <table class="b">
-            <tr class="c">
-                <th>Date</th>
-                <th>IncomeType</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Description</th>
-            </tr>
-        {% for con in incomes %}
-            <tr class="d">
-                <td>{{ con.date|date:"M d, y" }}</td>
-                <td><a href="{% url 'income-detail' con.id %}">{{ con.income_type }}</a></td>
-                <td>{{ con.amount }}</td>
-                <td>{{ con.category }}</td>
-                {% if con.description %}
-                    <td>{{ con.description }}</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-        </table>
-</div>
-    {% elif expenses %}
-        <h2 align="center" id="r">Hey {{ user }}, your expenses are listed below </h2>
-        <table class="b">
-            <tr class="c">
-                <th>Date</th>
-                <th>ExpenseType</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Description</th>
-            </tr>
-        {% for con in expenses %}
-            <tr class="d">
-                <td>{{ con.date|date:"M d, y" }}</td>
-                <td><a href="{% url 'expense-detail' con.id %}">{{ con.expense_type }}</a></td>
-                <td>{{ con.amount }}</td>
-                <td>{{ con.category }}</td>
-                {% if con.description %}
-                    <td>{{ con.description }}</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-        </table>
-    {% elif incomes %}
-        <h2 align="center" id="s">Hey {{ user }}, your incomes are listed below </h2>
-        <table class="b">
-            <tr class="c">
-                <th>Date</th>
-                <th>IncomeType</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Description</th>
-            </tr>
-        {% for con in incomes %}
-            <tr class="d">
-                <td>{{ con.date|date:"M d, y" }}</td>
-                <td><a href="{% url 'income-detail' con.id %}">{{ con.income_type }}</a></td>
-                <td>{{ con.amount }}</td>
-                <td>{{ con.category }}</td>
-                {% if con.description %}
-                    <td>{{ con.description }}</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-        </table>
-    {% else %}
-        <h1 align="center" id="t">your expense and incomes list is empty.</h1>
-    {% endif %}
-    <h2><a href="{% url 'expense-create' %}" class="e">+Add Expense</a></h2>
-    <h2><a href="{% url 'income-create' %}" class="e">+Add Income</a></h2>
-    {% if is_paginated %}
-
-        {% if page_obj.has_previous %}
-            <a href="?page=1">First</a>
-            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+<div class="row mt-3">
+    <div class="col-md-12">
+        {% if expenses and incomes %}
+            <h2 align="center">Hey {{ user }}, your expenses and incomes are listed below🤞</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Expense Type</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for con in expenses %}
+                        <tr>
+                            <td>{{ con.date|date:"M d, Y" }}</td>
+                            <td><a href="{% url 'expense-detail' con.id %}">{{ con.expense_type }}</a></td>
+                            <td>{{ con.amount }}</td>
+                            <td>{{ con.category }}</td>
+                            <td>{{ con.description }}</td>
+                        </tr>
+                    {% endfor %}
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Income Type</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    {% for con in incomes %}
+                        <tr>
+                            <td>{{ con.date|date:"M d, Y" }}</td>
+                            <td><a href="{% url 'income-detail' con.id %}">{{ con.income_type }}</a></td>
+                            <td>{{ con.amount }}</td>
+                            <td>{{ con.category }}</td>
+                            <td>{{ con.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif expenses %}
+            <h2 align="center">Hey {{ user }}, your expenses are listed below🤞</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Expense Type</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for con in expenses %}
+                        <tr>
+                            <td>{{ con.date|date:"M d, Y" }}</td>
+                            <td><a href="{% url 'expense-detail' con.id %}">{{ con.expense_type }}</a></td>
+                            <td>{{ con.amount }}</td>
+                            <td>{{ con.category }}</td>
+                            <td>{{ con.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif incomes %}
+            <h2 align="center">Hey {{ user }}, your incomes are listed below🤞</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Income Type</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for con in incomes %}
+                        <tr>
+                            <td>{{ con.date|date:"M d, Y" }}</td>
+                            <td><a href="{% url 'income-detail' con.id %}">{{ con.income_type }}</a></td>
+                            <td>{{ con.amount }}</td>
+                            <td>{{ con.category }}</td>
+                            <td>{{ con.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h1 align="center">Your expense and income list is empty😒</h1>
         {% endif %}
-
-        {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-                <a href="?page={{ num }}">{{ num }}</a>
-            {% elif num > page_obj.number|add:'-3' and num > page_obj.number|add:'3'%}
-                <a href="?page={{ num }}">{{ num }}</a>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <h2><a href="{% url 'expense-create' %}" class="btn btn-primary">+ Add Expense</a></h2>
+    </div>
+    <div class="col-md-6">
+        <h2><a href="{% url 'income-create' %}" class="btn btn-primary">+ Add Income</a></h2>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-12">
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-primary">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">Previous</a>
             {% endif %}
-        {% endfor %}
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a href="?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="btn btn-primary">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">Last</a>
+            {% endif %}
         {% endif %}
-
-    {% endif %}
+    </div>
+</div>
 {% endblock %}
