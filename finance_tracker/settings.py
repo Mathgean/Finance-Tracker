@@ -19,12 +19,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-la=ou-^am#2w&16n0i8b)f_*pa^l2p_6wady9e!f!sbo(th3h('
-
+#
+# SECRET_KEY = 'django-insecure-la=ou-^am#2w&16n0i8b)f_*pa^l2p_6wady9e!f!sbo(th3h('
+SECRET_KEY = os.environ.get('DEPLOYING_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['financetracker-1ac4047b40f2.herokuapp.com']
 
 # Application definition
 
@@ -129,5 +130,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mathgeanshgavelu1729@gmail.com'
-EMAIL_HOST_PASSWORD = 'zwbfvxlbyruubnyb'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
