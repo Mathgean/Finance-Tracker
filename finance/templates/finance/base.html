@@ -12,11 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-info">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
     <header class="bg-primary text-white p-3">
         <h1>SELF EXPENSE TRACKER</h1>
     </header>
@@ -58,6 +53,11 @@
             </div>
         </div>
     </nav>
+    % if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     <main class="container mt-4">
         <div class="card">
             <div class="card-body">
