@@ -3,32 +3,26 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Login now</h2>
-                    <form method="POST" style="margin-top: 30px;">
-                        {% csrf_token %}
-                        <div class="form-group row justify-content-center">
-                            <label for="username" class="col-sm-2 col-form-label text-right">Username:</label>
-                            <div class="col-sm-4">
-                                <input type="text" id="username" name="username" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row justify-content-center">
-                            <label for="password" class="col-sm-2 col-form-label text-right">Password:</label>
-                            <div class="col-sm-4">
-                                <input type="password" id="password" name="password" class="form-control">
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Log in</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <small>Need An Account? <a href="{% url 'register' %}" class="btn btn-link">Sign up</a></small>
-                        <small><a href="{% url 'password_reset' %}" class="btn btn-link">Forgotten Password?</a></small>
+            <form method="POST" style="padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Login Now</legend>
+                    <div class="mb-3">
+                        <label style="display: block; font-weight: bold; text-align: right;">Username:</label>
+                        <input type="text" name="username" class="form-control">
                     </div>
+                    <div class="mb-3">
+                        <label style="display: block; font-weight: bold; text-align: right;">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                </fieldset>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Log in</button>
                 </div>
+            </form>
+            <div class="text-center mt-3">
+                <small>Need an account? <a href="{% url 'register' %}" class="btn btn-link">Sign up</a></small>
+                <small><a href="{% url 'password_reset' %}" class="btn btn-link">Forgotten Password?</a></small>
             </div>
         </div>
     </div>
