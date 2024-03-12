@@ -1,24 +1,29 @@
 {% extends "finance/base.html" %}
 {% block content %}
-    <table class="b">
-        <tr class="c">
-            <th>Date</th>
-            <th>IncomeType</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Description</th>
-        </tr>
-
-        <tr class="d">
-            <td>{{ object.date|date:"M d, y" }}</td>
-            <td>{{ object.income_type }}</td>
-            <td>{{ object.amount }}</td>
-            <td>{{ object.category }}</td>
-            {% if object.description %}
+<div class="container mt-3">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Income Type</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ object.date|date:"M d, Y" }}</td>
+                <td>{{ object.income_type }}</td>
+                <td>{{ object.amount }}</td>
+                <td>{{ object.category }}</td>
                 <td>{{ object.description }}</td>
-            {% endif %}
-        </tr>
+            </tr>
+        </tbody>
     </table>
-    <a href="{% url 'income-update' object.id %}" class="f">Update</a>
-    <a href="{% url 'income-delete' object.id %}" class="f">Delete</a>
+    <div class="text-center">
+        <a href="{% url 'income-update' object.id %}" class="btn btn-primary">Update</a>
+        <a href="{% url 'income-delete' object.id %}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
 {% endblock %}

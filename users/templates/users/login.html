@@ -1,15 +1,34 @@
 {% extends "users/base.html" %}
 {% block content %}
-    <div>
-        <form method="POST">
-            {% csrf_token %}<!-- csrf token used for protection of forms from attack. Hence, django requires this. -->
-            <fieldset>
-                <legend>Login now</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <button type="submit">Log in</button>
+<div class="a">
+        <fieldset>
+                <legend class="text-center">Login now</legend>
+
+        <form method="POST" class="mt-5">
+            {% csrf_token %}
+
+                <div class="form-group row justify-content-center">
+                    <label for="username" class="col-sm-2 col-form-label text-right">Username:</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="username" name="username" class="form-control" >
+                    </div>
+                </div>
+                <div class="form-group row justify-content-center">
+                    <label for="password" class="col-sm-2 col-form-label text-right">Password:</label>
+                    <div class="col-sm-4">
+                        <input type="password" id="password" name="password" class="form-control" >
+                    </div>
+                </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
         </form>
-        <small>Need An Account? <a href="{% url 'register' %}">Sign up</a></small>
-        <small><a href="{% url 'password_reset' %}">Forgotten Password?</a></small>
-    </div>
+        <div class="text-center mt-3">
+            <small>Need An Account? <a href="{% url 'register' %}" class="btn btn-link">Sign up</a></small>
+            <small><a href="{% url 'password_reset' %}" class="btn btn-link">Forgotten Password?</a></small>
+        </div>
+    </fieldset>
+</div>
 {% endblock %}
+

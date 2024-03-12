@@ -1,9 +1,10 @@
 {% extends "finance/base.html" %}
 {% block content %}
-    <h1 align="center" id="e">EXPENSES</h1>
-    <div class="row mt-2" id="f">
-        <div class="col-md-8">
-            <h3 id="g">Pie representation</h3>
+<div class="container mt-3">
+    <h1 class="text-center">EXPENSES</h1>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h3 class="text-center">Pie Representation</h3>
             <canvas id="youChart" width="15" height="10"></canvas>
             <script>
                 var ctx = document.getElementById('youChart').getContext('2d');
@@ -47,8 +48,8 @@
                 });
             </script>
         </div>
-        <div class="col-md-8">
-            <h3 id="h">Bar Representation</h3>
+        <div class="col-md-6">
+            <h3 class="text-center">Bar Representation</h3>
             <canvas id="myChart" width="250" height="150"></canvas>
             <script>
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -92,4 +93,5 @@
             </script>
         </div>
     </div>
+</div>
 {% endblock %}

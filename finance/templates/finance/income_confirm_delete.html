@@ -1,14 +1,18 @@
 {% extends "finance/base.html" %}
 {% block content %}
-    <div>
-        <form method="POST">
-            {% csrf_token %}<!-- csrf token used for protection of forms from attack. Hence, django requires this. -->
-            <fieldset>
-                <legend>Delete Income</legend>
-              <h2>Are you sure you want to delete the income  '{{ object.income_type }}'?</h2>
-            </fieldset>
-            <button type="submit" id="x">Yes, Delete</button>
-            <a href="{% url 'income-detail' object.id %}" id="y">Cancel</a>
-        </form>
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Delete Income</legend>
+                    <h2 class="text-danger">Are you sure you want to delete the income from '{{ object.income_type }}'?</h2>
+                </fieldset>
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'income-detail' object.id %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}

@@ -104,7 +104,6 @@ class IncomeDeleteView(DeleteView):
     success_url = '/'
 
 
-@login_required
 def about(request):
     return render(request, 'finance/about.html')
 

@@ -1,13 +1,33 @@
+
 {% extends "finance/base.html" %}
 {% block content %}
-    <div id="n">
-        <form method="POST">
-            {% csrf_token %}<!-- csrf token used for protection of forms from attack. Hence, django requires this. -->
-            <fieldset>
-                <legend>Expense</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <button type="submit" id="o">{% if object %}Update{% else %}Add{% endif %}</button>
-        </form>
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>{% if object %}Update Expense{% else %}Add Expense{% endif %}</legend>
+                    <div class="mb-3" style="display: flex; flex-direction: column;">
+                        <label style="align-self: flex-start; font-weight: bold;">Income Type:</label>
+                        {{ form.expense_type }}
+                    </div>
+                    <div class="mb-3" style="display: flex; flex-direction: column;">
+                        <label style="align-self: flex-start; font-weight: bold;">Category:</label>
+                        {{ form.category }}
+                    </div>
+                    <div class="mb-3" style="display: flex; flex-direction: column;">
+                        <label style="align-self: flex-start; font-weight: bold;">Amount:</label>
+                        {{ form.amount }}
+                    </div>
+                    <div class="mb-3" style="display: flex; flex-direction: column;">
+                        <label style="align-self: flex-start; font-weight: bold;">Description:</label>
+                        {{ form.description }}
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn btn-primary">{% if object %}Update{% else %}Add{% endif %}</button>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}

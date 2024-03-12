@@ -1,27 +1,27 @@
 {% extends "users/base.html" %}
 {% block content %}
 <div class="container mt-4">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data" style="padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
                 {% csrf_token %}
                 <fieldset>
                     <legend>Profile Info</legend>
                     <div class="mb-3">
-                        {{ u_form.username.label_tag }}
-                        {{ u_form.username }}
+                        <label style="display: block; font-weight: bold;">Username:</label>
+                        <input type="text" name="username" value="{{ u_form.username.value }}" class="form-control" style="width: 100%;">
                     </div>
                     <div class="mb-3">
-                        {{ u_form.email.label_tag }}
-                        {{ u_form.email }}
+                        <label style="display: block; font-weight: bold;">Email:</label>
+                        <input type="email" name="email" value="{{ u_form.email.value }}" class="form-control">
                     </div>
                     <div class="mb-3">
-                        {{ p_form.image.label_tag }}
-                        {{ p_form.image }}
+                        <label style="display: block; font-weight: bold;">Image:</label>
+                        <input type="file" name="image" class="form-control">
                     </div>
                     <div class="mb-3">
-                        {{ p_form.budget_limit.label_tag }}
-                        {{ p_form.budget_limit }}
+                        <label style="display: block; font-weight: bold;">Budget Limit:</label>
+                        <input type="number" name="budget_limit" value="{{ p_form.budget_limit.value }}" class="form-control">
                     </div>
                 </fieldset>
                 <button type="submit" class="btn btn-primary">Update</button>
