@@ -15,13 +15,13 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form, 'title': 'register'})
+    return render(request, 'users/register.html', {'form': form, 'title': 'Register'})
 
 
 @login_required
 def logout_user(request):
     logout(request)
-    return render(request, 'users/logout.html')
+    return render(request, 'users/logout.html', {"title": "LoggedOut"})
 
 
 @login_required
@@ -37,10 +37,10 @@ def profile_edit(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-    context = {'u_form': u_form, 'p_form': p_form}
+    context = {"title": "EditProfile", 'u_form': u_form, 'p_form': p_form}
     return render(request, 'users/profile_edit.html', context)
 
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    return render(request, 'users/profile.html', {"title": "Profile"})

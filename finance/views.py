@@ -11,7 +11,6 @@ from .models import Expense, Income
 
 @login_required
 def home(request):
-
     expense_set = request.user.expense_set.filter(date__month=timezone.now().month, date__year=timezone.now().year)
     income_set = request.user.income_set.filter(date__month=timezone.now().month, date__year=timezone.now().year)
     if request.method == 'POST':
@@ -105,7 +104,10 @@ class IncomeDeleteView(DeleteView):
 
 
 def about(request):
-    return render(request, 'finance/about.html')
+    context = {
+        "title": "About",
+    }
+    return render(request, 'finance/about.html', context)
 
 
 def expense_chart(request):
@@ -133,6 +135,7 @@ def expense_chart(request):
                      'Personnel Needs', 'Education', 'Sports', 'Others']
     category_amount = [food, clothing, transport, homes, bills, entertainment, goods, needs, education, sports, others]
     context = {
+        "title": "ExpenseChart",
         'category_name': category_name,
         'category_amount': category_amount
     }
@@ -160,6 +163,7 @@ def income_chart(request):
     category_name = ['Salary', 'Sales', 'Dividends', 'Rental', 'Grands', 'Refunds', 'Awards', 'Others']
     category_amount = [salary, sales, dividends, rental, grands, refunds, awards, others]
     context = {
+        "title": "IncomeChart",
         'category_name': category_name,
         'category_amount': category_amount
     }
