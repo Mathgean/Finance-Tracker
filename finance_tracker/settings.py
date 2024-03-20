@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #
-# SECRET_KEY = 'django-insecure-la=ou-^am#2w&16n0i8b)f_*pa^l2p_6wady9e!f!sbo(th3h('
-SECRET_KEY = os.environ.get('DEPLOYING_KEY')
+SECRET_KEY = 'django-insecure-la=ou-^am#2w&16n0i8b)f_*pa^l2p_6wady9e!f!sbo(th3h('
+# SECRET_KEY = os.environ.get('DEPLOYING_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['financetracker-1ac4047b40f2.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -79,7 +80,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+DATABASES["default"]=dj_database_url.parse("postgres://finance_tracker_824g_user:AAWtdNUHl39Gqh5pqp6tsZE4zMiSzaZK@dpg-cntfp30l5elc73bfdd9g-a.oregon-postgres.render.com/finance_tracker_824g")
+# postgres://finance_tracker_824g_user:AAWtdNUHl39Gqh5pqp6tsZE4zMiSzaZK@dpg-cntfp30l5elc73bfdd9g-a.oregon-postgres.render.com/finance_tracker_824g
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
